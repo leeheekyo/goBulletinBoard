@@ -1,52 +1,41 @@
 package main
 
 import (
-    "fmt"
-    "database/sql"
-    _ "github.com/go-sql-driver/mysql"
+	"os"
+	"fmt"
+	"github.com/ziutek/mymysql/mysql"
+	_ "github.com/ziutek/mymysql/native"
 )
 
-/*
- * Tag... - a very simple struct
- */
-type Tag struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
 func main() {
-    fmt.Println("Go MySQL Tutorial")
-    
-    // Open up our database connection.
-    // I've set up a database on my local machine using phpmyadmin.
-    // The database is called testDb
-    // userID:password@tcp(127.0.0.1:3306)/dbName
-    db, err := sql.Open("mysql", "root:kyo@tcp(127.0.0.1:3306)/test")
-    
-    // if there is an error opening the connection, handle it
-    if err != nil {
-        panic(err.Error())
-    }
-    
-    // defer the close till after the main function has finished
-    // executing 
-    defer db.Close()
+	db := mysql.New("tcp", "", "127.0.0.1:3306", "root", "kyo", "test")
 
-    // Execute the query
-    results, err := db.Query("SELECT id, name FROM tags")
-    if err != nil {
-        panic(err.Error()) // proper error handling instead of panic in your app
-    }
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
 
-    for results.Next() {
-        var tag Tag
-        // for each row, scan the result into our tag composite object
-        err = results.Scan(&tag.ID, &tag.Name)
-        if err != nil {
-            panic(err.Error()) // proper error handling instead of panic in your app
-        }
-        // and then print out the tag's Name attribute
-        //log.Printf(tag.Name)
-    	fmt.Println(tag.Name)
-    }
+	rows, res, err := db.Query("select * from tags where id = '%s'","test1")
+	if err != nil {
+		panic(err)
+	}
+	if res == nil {
+		panic(res)
+	}
+
+	for _, row := range rows {
+		for _, col := range row {
+			if col == nil {
+				// col has NULL value
+			} else {
+				// Do something with text in col (type []byte)
+			}
+		}
+		// You can get specific value from a row
+		val1 := row[1].([]byte)
+
+		// You can use it directly if conversion isn't needed
+		os.Stdout.Write(val1)
+		fmt.Println()
+	}
 }
