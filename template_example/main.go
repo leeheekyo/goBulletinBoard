@@ -1,29 +1,34 @@
 package main
+
 import (
-    "fmt"
-    "html/template"
-    "net/http" 
+	"html/template"
+	"net/http"
 )
-const (
-  Port = ":8080"
-)
- 
-func serveStatic(w http.ResponseWriter, r *http.Request) {  
-  t, err := template.ParseFiles("test.html")
-    if err != nil {
-        fmt.Println(err)
-    }
-    items := struct {
-        Country string
-        City string
-    }{
-        Country: "Australia",
-        City: "Paris",
-    }
-    t.Execute(w, items)
+
+type Todo struct {
+	Title string
+	Done  bool
 }
- 
+
+type TodoPageData struct {
+	PageTitle string
+	Todos     []Todo
+}
+
 func main() {
-    http.HandleFunc("/",serveStatic)    
-    http.ListenAndServe(Port, nil)
+	tmpl := template.Must(template.ParseFiles("layout.html"))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		data := TodoPageData{
+			PageTitle: "My TODO list",
+			Todos: []Todo{
+				{Title: "Task 1", Done: false},
+				{Title: "Task 2", Done: true},
+				{Title: "Task 3", Done: true},
+			},
+		}
+		tmpl.Execute(w, data)
+	})
+
+	http.ListenAndServe(":8080", nil)
 }
