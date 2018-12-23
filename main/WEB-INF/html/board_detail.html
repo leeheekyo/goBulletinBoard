@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/WEB-INF/css/board.css">
+<script src="/WEB-INF/javascript/board.js"></script>
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <!--<p><a href="#">Link</a></p>-->
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Bulletin Board Detail</h1>
+      <hr>
+
+<table id="board_detail_table">
+<tr>
+  <th>Title</th>
+  <td>{{.Title}}</td>
+</tr>
+<tbody>
+<tr>
+  <th>Author</th>
+  <td>{{.Author}}</td>
+</tr>
+<tr>
+  <th>Date</th>
+  <td>{{.DateInfo}}</td>
+</tr>
+<tr>
+  <th>Body</th>
+  <td><textarea rows=15 class="textarea">{{.Body}}</textarea></td>
+</tr>
+</tbody>
+</table>
+
+{{ if( and (ne .Name "") (eq .Name .Author) ) }}
+<form id="board_modify_form" action="board_modify.do" method="POST">
+  <input name="seq" type="number" value="{{.Seq}}" hidden/>
+  <input name="author" type="text" value="{{.Author}}" hidden/>
+</form>
+<button class="board_add_btn" onclick="call_board_modify()">MODIFY</button>
+<button class="board_cncl_btn" onclick="board_delete({{.Seq}},{{.Author}})">DELETE</button>
+{{ end }}
+
+    </div>
+  </div>
+</div>
+
+<br style="margin: 60px;" />
+

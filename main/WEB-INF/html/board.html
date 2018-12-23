@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/WEB-INF/css/board.css">
+<script src="/WEB-INF/javascript/board.js"></script>
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <!--<p><a href="#">Link</a></p>-->
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Bulletin Board</h1>
+      <hr>
+      <!--add board -->
+      <button class="board_add_btn" onclick="call_board_add()">ADD CONTENT</button>
+      <!--detail board -->
+      <form id="board_detail_form" action="board_detail.do" method="POST" hidden>
+        <input id="board_detail_seq" name="seq" type="number" hidden/>
+      </form>
+<table id="board_table">
+<title>{{.BoardTitle}}</title>
+<thead>
+<tr>
+  <th>Title</th>
+  <th>Author</th>
+  <th>Date</th>
+</tr>
+</thead>
+<tbody>
+{{range .BoardDatas}}
+<tr class="pointer" onclick="call_board_detail({{.Seq}});">
+  <td>{{.Title}}</td>
+  <td>{{.Author}}</td>
+  <td>{{.DateInfo}}</td>
+</tr>
+{{ end }}
+</tbody>
+</table>
+
+<!-- pagenation part -->
+<div style="width:100%; text-align:center;">
+<form id="board_form" action="/board.do" method="POST">
+<input id="board_cnt" name="cnt" type="number" value="{{.BoardCnt}}" hidden />
+<input id="board_page" name="page" type="number" value="{{.BoardPage}}" hidden />
+</form>
+<div id="board_pagenation" class="pagination">
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<br style="margin: 60px;" />
+

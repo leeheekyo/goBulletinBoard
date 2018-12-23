@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/WEB-INF/css/board.css">
+<script src="/WEB-INF/javascript/board.js"></script>
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <!--<p><a href="#">Link</a></p>-->
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Bulletin Board Detail</h1>
+      <hr>
+
+<form id="board_modify_check_form" action="board_modify_check.do" method="POST">
+<input name="seq" type="number" value="{{.Seq}}" hidden />
+<table id="board_detail_table">
+<tr>
+  <th>Title</th>
+  <td><input name="title" type="text" value="{{.Title}}" /></td>
+</tr>
+<tr>
+  <th>Author</th>
+  <td><input name="author" type="text" value={{.Author}} /></td>
+</tr>
+<tr>
+  <th>Date</th>
+  <td>{{.DateInfo}}</td>
+</tr>
+<tr>
+  <th>Body</th>
+  <td><textarea rows=15 class="textarea" name="body">{{.Body}}</textarea></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+{{ if( and (ne .Name "") (eq .Name .Author) ) }}
+<button class="board_add_btn" onclick="call_board_modify_check()">SAVE</button>
+{{ end }}
+
+    </div>
+  </div>
+</div>
+
+<br style="margin: 60px;" />
+

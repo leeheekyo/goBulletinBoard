@@ -1,6 +1,4 @@
 # boardUsingGo
-it is server program using GO language.
+It is server program using GO language. This project consists of "example", "main".
 
-our project is making. and it will be finished in 2019.01.01
-
-add contributor.
+Detailed explainations are on each directory. And if you have any questions, please write a comment on this project.
