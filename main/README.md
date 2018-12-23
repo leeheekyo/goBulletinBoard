@@ -30,7 +30,7 @@ And run it using command `go run go/main.go`.
 ![](images/_login_click_page.png)
 
  - click the "Sign up" (it located bottom of the login form) 
-![](images/signUp_click_page.png)
+![](images/sign_up_click_page.png)
 
  - fill out the registration form and click the "Restrater" button
 ![](images/registration_page.png)
