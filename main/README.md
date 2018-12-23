@@ -21,26 +21,26 @@ And run it using command `go run go/main.go`.
 
 ### tutorial
  - start the go commant
-![](images/main_start.png)
+![](images/start.png)
 
  - go to the webpage(127.0.0.1:8080)
-![](images/main_start_page.png)
+![](images/start_page.png)
 
  - click the login button
-![](images/main_login_click_page.png)
+![](images/_login_click_page.png)
 
  - click the "Sign up" (it located bottom of the login form) 
-![](images/main_signUp_click_page.png)
+![](images/signUp_click_page.png)
 
  - fill out the registration form and click the "Restrater" button
-![](images/main_registration_page.png)
+![](images/registration_page.png)
 
  - fill out the login form and click the "Login" button
-![](images/main_login_fill_out_page.png)
+![](images/login_fill_out_page.png)
 
  - click the "Board" tab.
-![](images/main_board_page.png)
+![](images/board_page.png)
 
  - you can add the board and show the detail infomation of board and modify and delete it.
-![](images/main_board_detail_page.png)
+![](images/board_detail_page.png)
 
