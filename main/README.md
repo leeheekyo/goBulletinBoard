@@ -14,8 +14,33 @@ Before executing this directory, you should install the package using following 
 
 And before executing this directory, you should create tags table which follow description.
 
-    mysql> create table login(email varchar(50) PRIMARY KEY, passwd varchar(30), name varchar(30), telephone varchar(12));
+    mysql> create table login(email varchar(50) PRIMARY KEY, passwd varchar(512), name varchar(30), telephone varchar(12));
     mysql> create table board( seq INT(10) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(250), author VARCHAR(30), body LONGTEXT, mod_dt CHAR(8), mod_tm CHAR(6), reg_dt CHAR(8), reg_tm CHAR(6) );
 
 And run it using command `go run go/main.go`.
+
+### tutorial
+ - start the go commant
+![](images/main_start.png)
+
+ - go to the webpage(127.0.0.1:8080)
+![](images/main_start_page.png)
+
+ - click the login button
+![](images/main_login_click_page.png)
+
+ - click the "Sign up" (it located bottom of the login form) 
+![](images/main_signUp_click_page.png)
+
+ - fill out the registration form and click the "Restrater" button
+![](images/main_registration_page.png)
+
+ - fill out the login form and click the "Login" button
+![](images/main_login_fill_out_page.png)
+
+ - click the "Board" tab.
+![](images/main_board_page.png)
+
+ - you can add the board and show the detail infomation of board and modify and delete it.
+![](images/main_board_detail_page.png)
 

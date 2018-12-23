@@ -2,6 +2,7 @@
 #board_table, #board_detail_table{
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  margin-top: 12px;
   width: 100%;
 }
 
@@ -24,14 +25,6 @@
 
 .pointer {
   cursor: pointer;
-}
-
-.green {
-  background-color: #4CAF50;
-}
-
-.red {
-  background-color: #f44336;
 }
 
 /* Pagenation css */
@@ -60,7 +53,6 @@
 
 /* Set a style for add board*/
 .board_add_btn {
-  margin-bottom: 10px;
   float: right;
   background-color: white;
   color: black;

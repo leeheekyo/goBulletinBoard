@@ -58,11 +58,6 @@ button:hover {
   padding: 16px;
 }
 
-/*span.psw {
-  float: right;
-  padding-top: 16px;
-}*/
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -115,5 +110,13 @@ button:hover {
 @keyframes animatezoom {
   from {transform: scale(0)} 
   to {transform: scale(1)}
+}
+
+.green {
+  background-color: #4CAF50;
+}
+
+.red {
+  background-color: #f44336;
 }
 

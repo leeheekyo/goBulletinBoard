@@ -13,6 +13,12 @@ function call_board(page){
     $("#board_form").submit();
 }
 
+function call_board_search(){
+    var keyword = $("#board_search").val();
+    $("#keyword").val(keyword);
+    call_board(1);
+}
+
 function board_add_check(){
     $.ajax({
         type: "post",

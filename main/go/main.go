@@ -39,6 +39,8 @@ type Board struct {
     BoardTitle string
     BoardCnt int
     BoardPage int
+    Keyword string
+    Name string
     BoardDatas []BoardData
 }
 
@@ -195,14 +197,22 @@ func call_board(w http.ResponseWriter, r *http.Request) {
     db.Connect()
 
     //parameter setting
+    keyword := r.FormValue("keyword")
     page,_ := strconv.Atoi(r.FormValue("page"))
     if page == 0 {
       page = 1
     }
 
+    var cnts []mysql.Row
+    var rows []mysql.Row
     //query
-    cnts, _, _ := db.Query("SELECT CEIL(COUNT(1)/10) FROM board")
-    rows, _, _ := db.Query("SELECT A.* FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo, @rownum:=@rownum+1 rnum FROM board, (select @rownum:=0) r ORDER BY seq DESC) A where rnum>%d and rnum<=%d",(page-1)*10, page*10)
+    if keyword != ""  {
+        cnts, _, _ = db.Query("SELECT CEIL(COUNT(1)/10) FROM board WHERE INSTR( CONCAT(Title,Author,Body), '"+keyword+"') > 0")
+        rows, _, _ = db.Query("SELECT A.* FROM (SELECT A.*, @rownum:=@rownum+1 rnum FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo FROM board WHERE INSTR( CONCAT(Title,Author,Body), '"+keyword+"') > 0 ) A, (select @rownum:=0) R ORDER BY DateInfo DESC) A where rnum>%d and rnum<=%d", (page-1)*10, page*10)
+    } else {
+        cnts, _, _ = db.Query("SELECT CEIL(COUNT(1)/10) FROM board")
+        rows, _, _ = db.Query("SELECT A.* FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo, @rownum:=@rownum+1 rnum FROM board, (select @rownum:=0) r ORDER BY seq DESC) A where rnum>%d and rnum<=%d",(page-1)*10, page*10)
+    }
 
     cnt := cnts[0].Int(0)
     var item []BoardData
@@ -219,6 +229,8 @@ func call_board(w http.ResponseWriter, r *http.Request) {
         BoardTitle:"kyo board",
         BoardCnt:cnt,
         BoardPage:page,
+        Keyword:keyword,
+        Name:name,
         BoardDatas:item,
     }
 

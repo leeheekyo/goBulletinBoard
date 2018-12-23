@@ -32,6 +32,9 @@ window.onload = function() {
             $("#board_pagenation a:eq("+(page+1)+")").addClass("active");
         }
     }
+    else if( call_location.substr(0,6)=="/board" ) {
+        $("#board").addClass("active");
+    }
     else {
         $("#main").addClass("active");
     }
@@ -49,7 +52,10 @@ function login_view(){
 
 // login check
 function login_check(){
-    if( $("#login input:eq(0)").val()!="" && $("#login input:eq(1)").val()!="" ) {
+    var password = $("#login input:eq(2)").val();
+    if( $("#login input:eq(0)").val()!="" && password !="" ) {
+        var encryptVal = SHA512(password)
+        $("#login input:eq(1)").val(encryptVal);
         $.ajax({
             type: "post",
             url: "/login_check.do",
@@ -73,7 +79,7 @@ function login_check(){
     }
 }
 // logout
-function loginout(){
+function logout(){
     $.ajax({
         type: "post",
         url: "/logout.do",
@@ -107,10 +113,10 @@ function registration_view(){
 function registration_check(){
     var is_error = false;
     var email =  $("#registration input:eq(0)").val();
-    var password =  $("#registration input:eq(1)").val();
-    var password_repeat = $("#registration input:eq(2)").val();
-    var name =  $("#registration input:eq(3)").val();
-    var telephone =  $("#registration input:eq(4)").val();
+    var password =  $("#registration input:eq(2)").val();
+    var password_repeat = $("#registration input:eq(3)").val();
+    var name =  $("#registration input:eq(4)").val();
+    var telephone =  $("#registration input:eq(5)").val();
 
     if( email == "" ){
         is_error = true;
@@ -131,8 +137,9 @@ function registration_check(){
 
     //no error then execute.
     if(is_error == false) {
-        alert($("#registration_form").serialize());
-        if( $("#registration input:eq(1)").val()==$("#registration input:eq(2)").val() ) {
+        if( password == password_repeat ) {
+            var encryptVal = SHA512(password);
+            $("#registration input:eq(1)").val(encryptVal);
             $.ajax({
                 type: "post",
                 url: "/registration_check.do",
@@ -140,6 +147,7 @@ function registration_check(){
                 contentType: "application/x-www-form-urlencoded",
                 success: function(responseData, textStatus, jqXHR) {
                     if(responseData == "0") {
+                        alert("Successfully restrated!");
                         registration_view();
                         login_view();
                     } else {

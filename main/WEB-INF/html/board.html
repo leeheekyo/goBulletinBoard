@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="/WEB-INF/css/board.css">
 <script src="/WEB-INF/javascript/board.js"></script>
 
+<!--detail board -->
+<form id="board_detail_form" action="board_detail.do" method="POST" hidden>
+<input id="board_detail_seq" name="seq" type="number" hidden/>
+</form>
+
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -9,12 +14,12 @@
     <div class="col-sm-8 text-left"> 
       <h1>Bulletin Board</h1>
       <hr>
+      <input id="board_search" type="text" value="{{.Keyword}}"/>
+      <button onclick="call_board_search();">SEARCH</button>
+{{ if .Name  }}
       <!--add board -->
       <button class="board_add_btn" onclick="call_board_add()">ADD CONTENT</button>
-      <!--detail board -->
-      <form id="board_detail_form" action="board_detail.do" method="POST" hidden>
-        <input id="board_detail_seq" name="seq" type="number" hidden/>
-      </form>
+{{ end }}
 <table id="board_table">
 <title>{{.BoardTitle}}</title>
 <thead>
@@ -38,6 +43,7 @@
 <!-- pagenation part -->
 <div style="width:100%; text-align:center;">
 <form id="board_form" action="/board.do" method="POST">
+<input id="keyword" name="keyword" type="text" value="{{.Keyword}}" hidden/>
 <input id="board_cnt" name="cnt" type="number" value="{{.BoardCnt}}" hidden />
 <input id="board_page" name="page" type="number" value="{{.BoardPage}}" hidden />
 </form>
