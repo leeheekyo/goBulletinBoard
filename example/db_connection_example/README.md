@@ -20,6 +20,7 @@ Before executing this directory, you should create tags table which follow descr
 And run it using command `go run main.go`.
 
 REF) There are two example to execute sql statement.
+
     //case 1
     db := mysql.New("tcp", "", "127.0.0.1:3306", user, pass, dbname)
     db.Connect()

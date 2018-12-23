@@ -15,7 +15,7 @@ import (
 // main logic 
 func index(w http.ResponseWriter, r *http.Request) {
     fmt.Printf("index call\n")
-	http.ServeFile(w, r, "../html/index.html")
+	http.ServeFile(w, r, "html/index.html")
 }
 
 // upload logic
@@ -39,7 +39,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
            }
            defer file.Close()
            fmt.Fprintf(w, "%v", handler.Header)
-           f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+           f, err := os.OpenFile("test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
            if err != nil {
                fmt.Println(err)
                return

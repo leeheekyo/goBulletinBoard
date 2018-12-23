@@ -13,7 +13,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
  
     switch r.Method {
     case "GET":     
-         http.ServeFile(w, r, "../html/index.html")
+         http.ServeFile(w, r, "html/index.html")
     case "POST":
         // Call ParseForm() to parse the raw query and update r.PostForm and r.Form.
         if err := r.ParseForm(); err != nil {

@@ -17,5 +17,5 @@ And before executing this directory, you should create tags table which follow d
     mysql> create table login(email varchar(50) PRIMARY KEY, passwd varchar(30), name varchar(30), telephone varchar(12));
     mysql> create table board( seq INT(10) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(250), author VARCHAR(30), body LONGTEXT, mod_dt CHAR(8), mod_tm CHAR(6), reg_dt CHAR(8), reg_tm CHAR(6) );
 
-And run it using command `go run main.go`.
+And run it using command `go run go/main.go`.
 
