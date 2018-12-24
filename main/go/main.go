@@ -19,6 +19,8 @@ const (
 	dbname = "test"
 )
 
+const sepa = "#@*"
+
 type BoardDataDetail struct{
     Seq int
     Title string
@@ -207,8 +209,8 @@ func call_board(w http.ResponseWriter, r *http.Request) {
     var rows []mysql.Row
     //query
     if keyword != ""  {
-        cnts, _, _ = db.Query("SELECT CEIL(COUNT(1)/10) FROM board WHERE INSTR( CONCAT(Title,Author,Body), '"+keyword+"') > 0")
-        rows, _, _ = db.Query("SELECT A.* FROM (SELECT A.*, @rownum:=@rownum+1 rnum FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo FROM board WHERE INSTR( CONCAT(Title,Author,Body), '"+keyword+"') > 0 ) A, (select @rownum:=0) R ORDER BY DateInfo DESC) A where rnum>%d and rnum<=%d", (page-1)*10, page*10)
+        cnts, _, _ = db.Query("SELECT CEIL(COUNT(1)/10) FROM board WHERE INSTR( CONCAT(Title,'"+sepa+"',Author,'"+sepa+"',Body), '%s') > 0", keyword)
+        rows, _, _ = db.Query("SELECT A.* FROM (SELECT A.*, @rownum:=@rownum+1 rnum FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo FROM board WHERE INSTR( CONCAT(Title,'"+sepa+"',Author,'"+sepa+"',Body), '%s') > 0 ) A, (select @rownum:=0) R ORDER BY DateInfo DESC) A where rnum>%d and rnum<=%d", keyword, (page-1)*10, page*10)
     } else {
         cnts, _, _ = db.Query("SELECT CEIL(COUNT(1)/10) FROM board")
         rows, _, _ = db.Query("SELECT A.* FROM (SELECT seq, Title, Author, concat(mod_dt, mod_tm) DateInfo, @rownum:=@rownum+1 rnum FROM board, (select @rownum:=0) r ORDER BY seq DESC) A where rnum>%d and rnum<=%d",(page-1)*10, page*10)
