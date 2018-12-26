@@ -20,14 +20,14 @@ And before executing this directory, you should create tags table which follow d
 And run it using command `go run go/main.go`.
 
 ### tutorial
- - start the go commant
+ - start the go command `go run go/main.go` in main directory.
 ![](images/start.png)
 
  - go to the webpage(127.0.0.1:8080)
 ![](images/start_page.png)
 
  - click the login button
-![](images/_login_click_page.png)
+![](images/login_click_page.png)
 
  - click the "Sign up" (it located bottom of the login form) 
 ![](images/sign_up_click_page.png)
