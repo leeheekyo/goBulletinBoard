@@ -19,28 +19,36 @@ And before executing this directory, you should create tags table which follow d
 
 And run it using command `go run go/main.go`.
 
-### tutorial
- - start the go command `go run go/main.go` in main directory.
+### TUTORIAL
+ - Start the go command `go run go/main.go` in main directory.
 ![](images/start.png)
 
- - go to the webpage(127.0.0.1:8080)
+
+ - Go to the webpage(127.0.0.1:8080)
 ![](images/start_page.png)
 
- - click the login button
+
+ - Click the login button
 ![](images/login_click_page.png)
 
- - click the "Sign up" (it located bottom of the login form) 
+
+ - Click the "Sign up" (it located bottom of the login form) 
 ![](images/sign_up_click_page.png)
 
- - fill out the registration form and click the "Restrater" button
+
+ - Fill out the registration form and click the "Restrater" button
 ![](images/registration_page.png)
 
- - fill out the login form and click the "Login" button
+
+ - Fill out the login form and click the "Login" button
 ![](images/login_fill_out_page.png)
 
- - click the "Board" tab.
+
+ - Click the "Board" tab.
 ![](images/board_page.png)
 
- - you can add the board and show the detail infomation of board and modify and delete it.
+
+ - You can add the board and show the detail infomation of board and modify and delete it.
 ![](images/board_detail_page.png)
+
 
