@@ -1,4 +1,4 @@
-# boardUsingGo
+# goBulletinBoard
 It is server program using GO language.
 
 This directory is the test page for uploading the image file.

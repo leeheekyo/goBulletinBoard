@@ -1,4 +1,4 @@
-# boardUsingGo
+# goBulletinBoard
 It is erver program using GO language.
 
 This directory is the test page for session control and refer to "http://www.golangprograms.com/get-set-and-clear-session-in-golang.html".

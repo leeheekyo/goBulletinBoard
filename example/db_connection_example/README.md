@@ -1,4 +1,4 @@
-# boardUsingGo
+# goBulletinBoard
 It is server program using GO language.
 
 This directory is the test page for db connection and refer to "https://github.com/ziutek/mymysql".

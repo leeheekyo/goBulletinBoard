@@ -181,7 +181,7 @@ func call_main(w http.ResponseWriter, r *http.Request) {
     login_param := template.FuncMap{ "Name" : name, }
 
     //make a html file
-    tmpl := template.Must(template.ParseFiles("WEB-INF/html/head.html"))
+    tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
     tmpl.Execute(w, login_param)
     main_bytes, _ := ioutil.ReadFile("WEB-INF/html/main.html")
     fmt.Fprintf(w, string(main_bytes))
