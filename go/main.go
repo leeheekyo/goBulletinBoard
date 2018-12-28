@@ -183,9 +183,9 @@ func call_main(w http.ResponseWriter, r *http.Request) {
     //make a html file
     tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
     tmpl.Execute(w, login_param)
-    main_bytes, _ := ioutil.ReadFile("WEB-INF/html/main.html")
+    main_bytes, _ := ioutil.ReadFile("WebContent/html/main.html")
     fmt.Fprintf(w, string(main_bytes))
-    tail_bytes, _ := ioutil.ReadFile("WEB-INF/html/tail.html")
+    tail_bytes, _ := ioutil.ReadFile("WebContent/html/tail.html")
     fmt.Fprintf(w, string(tail_bytes))
 
 }
@@ -237,11 +237,11 @@ func call_board(w http.ResponseWriter, r *http.Request) {
     }
 
     //make a html file
-    tmpl := template.Must(template.ParseFiles("WEB-INF/html/head.html"))
+    tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
     tmpl.Execute(w, login_param)
-    tmpl = template.Must(template.ParseFiles("WEB-INF/html/board.html"))
+    tmpl = template.Must(template.ParseFiles("WebContent/html/board.html"))
     tmpl.Execute(w, items)
-    tail_bytes, _ := ioutil.ReadFile("WEB-INF/html/tail.html")
+    tail_bytes, _ := ioutil.ReadFile("WebContent/html/tail.html")
     fmt.Fprintf(w, string(tail_bytes))
 }
 
@@ -272,11 +272,11 @@ func call_board_detail(w http.ResponseWriter, r *http.Request) {
         }
 
         //make a html file
-        tmpl := template.Must(template.ParseFiles("WEB-INF/html/head.html"))
+        tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
         tmpl.Execute(w, login_param)
-        tmpl = template.Must(template.ParseFiles("WEB-INF/html/board_detail.html"))
+        tmpl = template.Must(template.ParseFiles("WebContent/html/board_detail.html"))
         tmpl.Execute(w, item)
-        tail_bytes, _ := ioutil.ReadFile("WEB-INF/html/tail.html")
+        tail_bytes, _ := ioutil.ReadFile("WebContent/html/tail.html")
         fmt.Fprintf(w, string(tail_bytes))
     } else {
         fmt.Println("[" + name + "] Abnormal approach on board_detail.do.")
@@ -291,11 +291,11 @@ func call_board_add(w http.ResponseWriter, r *http.Request) {
     login_param := template.FuncMap{ "Name" : name, }
 
     //make a html file
-    tmpl := template.Must(template.ParseFiles("WEB-INF/html/head.html"))
+    tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
     tmpl.Execute(w, login_param)
-    tmpl = template.Must(template.ParseFiles("WEB-INF/html/board_add.html"))
+    tmpl = template.Must(template.ParseFiles("WebContent/html/board_add.html"))
     tmpl.Execute(w, login_param)
-    tail_bytes, _ := ioutil.ReadFile("WEB-INF/html/tail.html")
+    tail_bytes, _ := ioutil.ReadFile("WebContent/html/tail.html")
     fmt.Fprintf(w, string(tail_bytes))
 
 }
@@ -353,11 +353,11 @@ func board_modify(w http.ResponseWriter, r *http.Request) {
             }
 
             //make a html file
-            tmpl := template.Must(template.ParseFiles("WEB-INF/html/head.html"))
+            tmpl := template.Must(template.ParseFiles("WebContent/html/head.html"))
             tmpl.Execute(w, login_param)
-            tmpl = template.Must(template.ParseFiles("WEB-INF/html/board_modify.html"))
+            tmpl = template.Must(template.ParseFiles("WebContent/html/board_modify.html"))
             tmpl.Execute(w, item)
-            tail_bytes, _ := ioutil.ReadFile("WEB-INF/html/tail.html")
+            tail_bytes, _ := ioutil.ReadFile("WebContent/html/tail.html")
             fmt.Fprintf(w, string(tail_bytes))
         } else {
             fmt.Println("[" + name + "] Abnormal approach(no data) on board_modify.do.")
@@ -435,7 +435,7 @@ func main() {
     http.HandleFunc("/login_check.do", login_check)
     http.HandleFunc("/logout.do", logout)
     http.HandleFunc("/registration_check.do", registration_check)
-    http.Handle("/WEB-INF/", http.StripPrefix("/WEB-INF/", http.FileServer(http.Dir("WEB-INF"))))
+    http.Handle("/WebContent/", http.StripPrefix("/WebContent/", http.FileServer(http.Dir("WebContent"))))
  
     fmt.Printf("Starting server for testing HTTP POST...\n")
     if err := http.ListenAndServe(":8080", nil); err != nil {
